@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Button } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Typography, Button } from '@mui/material';
 import SubComponent from './SubComponent';
 
 const Component = ({ componentTitle, jsonFile, answers, setAnswers, subheading, setSubheading }) => {
@@ -10,7 +9,7 @@ const Component = ({ componentTitle, jsonFile, answers, setAnswers, subheading, 
     const loadQuestions = async () => {
       try {
         const questionsModule = await import(`../assets/${jsonFile}.json`);
-        
+
         if (questionsModule.default && Array.isArray(questionsModule.default.questions)) {
           setQuestions(questionsModule.default.questions);
           setSubheading(questionsModule.default.subheading || '');
@@ -49,23 +48,21 @@ const Component = ({ componentTitle, jsonFile, answers, setAnswers, subheading, 
       {questions.length > 0 ? (
         <>
           {questions.map((question, index) => (
-            <Accordion key={index}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{question.question}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <SubComponent 
-                  question={question}
-                  questionId={index}
-                  onAnswerChange={handleAnswerChange}
-                  selectedAnswer={answers[`${componentTitle}_${subheading}_${index}`] || ""}
-                />
-              </AccordionDetails>
-            </Accordion>
+            <div key={index} className="question-item">
+              {/* <Typography variant="h6">{question.question}</Typography> */}
+              <SubComponent
+                question={question}
+                questionId={index}
+                onAnswerChange={handleAnswerChange}
+                selectedAnswer={answers[`${componentTitle}_${subheading}_${index}`] || ""}
+              />
+            </div>
           ))}
-          <Button onClick={handleReset} variant="outlined" color="primary" sx={{ mt: 2 }}>
+          <div className='reset-button'>
+          <Button  onClick={handleReset} variant="outlined" color="primary" sx={{ mt: 2 }}>
             Reset All
           </Button>
+          </div> 
         </>
       ) : (
         <Typography>Loading questions...</Typography>

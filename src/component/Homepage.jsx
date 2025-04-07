@@ -46,30 +46,58 @@ const HomePage = () => {
 
   return (
     <Box className="home-container" p={3}>
-      <Box display="flex" alignItems="center" mb={2}>
+      <Box display="flex" alignItems="center" justifyContent='center' mb={2}>
         <FaDatabase style={{ fontSize: 40, marginRight: 10 }} />
         <Typography variant="h4" fontWeight="bold">Data Quality Index</Typography>
       </Box>
+      <Box display="flex" alignItems="center" justifyContent='center' mb={2}>
       <Typography variant="subtitle1" color="textSecondary" gutterBottom>
         Comprehensive Assessment of Data Quality for Improved Decision-Making
       </Typography>
+      </Box>
 
       <Divider sx={{ my: 2 }} />
 
       {Configs.map(config => (
-        <Accordion key={config.id} expanded={openComponent === config.id} onChange={() => handleComponentClick(config.id)}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel-${config.id}-content`} id={`panel-${config.id}-header`}>
-            <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center' }}>
+        <Accordion
+          key={config.id}
+          expanded={openComponent === config.id}
+          onChange={() => handleComponentClick(config.id)}
+          sx={{ width: '100%' }}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`panel-${config.id}-content`}
+            id={`panel-${config.id}-header`}
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              height: '100%', 
+              flexDirection: 'row',
+              padding: '0 16px', 
+            }}
+          >
+            <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
               {config.icon}
               <Box ml={1}>{config.title}</Box>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ padding: '16px' }}>
             {config.subcategories.map(subcategory => (
               <Box key={subcategory.title} mb={2}>
-                <Typography variant="subtitle1" sx={{ cursor: 'pointer', fontWeight: 'bold' }} onClick={() => handleSubcategoryClick(config.id, subcategory.title)}>
+                <Box
+                  sx={{
+                    cursor: 'pointer',
+                    fontWeight: 'bold',
+                    padding: '8px 0',
+                    // borderBottom: '1px solid #ccc',
+                  }}
+                  onClick={() => handleSubcategoryClick(config.id, subcategory.title)}
+                >
                   {subcategory.title}
-                </Typography>
+                </Box>
+
                 {openSubcategory[config.id] === subcategory.title && (
                   <Component
                     componentTitle={config.title}
@@ -85,11 +113,11 @@ const HomePage = () => {
           </AccordionDetails>
         </Accordion>
       ))}
-
+      <Box display="flex" alignItems="center" justifyContent='center' mb={2}>
       <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 3 }}>
         Submit
       </Button>
-
+      </Box>
       <EmployeeIdModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

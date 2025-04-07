@@ -1,4 +1,3 @@
-/* Global Styles */
 body {
     z-index: 1;
     margin: 0;
@@ -22,14 +21,14 @@ body {
     opacity: 0.4;
   }
   
-  /* Home Container */
+  
   .home-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  /* Header */
+
   .container-header {
     display: flex;
     align-items: center;
@@ -178,20 +177,15 @@ body {
   }
   
   .reset-button {
-    display: block;
+    display: flex;
     margin: 0 auto;
     padding: 8px 16px;
     font-size: 14px;
     cursor: pointer;
-    background-color: #95a5a6;
     border: none;
     color: white;
     border-radius: 4px;
-  }
-  
-  .reset-button:hover {
-    background-color: #636a6a;
-    transition: all 0.2s ease-in-out;
+    justify-content: center;
   }
   
   /* Modal */
@@ -216,11 +210,11 @@ body {
   }
   
   /* Radio Buttons */
-  .radio-group {
+  /* .radio-group {
     display: flex;
     justify-content: space-around;
     margin-top: 10px;
-  }
+  } */
   
   .radio-group label {
     display: flex;
@@ -253,13 +247,6 @@ body {
     font-size: 20px;
   }
   /* Horizontal Radio Group */
-.radio-group {
-    display: flex;               /* Flex container */
-    justify-content: space-around; /* Space between radio buttons */
-    flex-wrap: wrap;             /* Allow wrapping if needed */
-    margin-top: 10px;
-    gap: 15px;                   /* Space between items */
-  }
   
   .radio-group label {
     display: flex;
